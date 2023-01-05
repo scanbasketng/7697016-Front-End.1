@@ -1,33 +1,47 @@
 // Récupération des pièces depuis le fichier JSON
-const reponse = await fetch('pieces-autos.json');
-const pieces = await reponse.json();
-
-for (let i = 0; i < pieces.length; i++) {
-
-    // Récupération de l'élément du DOM qui accueillera les fiches
-    const sectionFiches = document.querySelector(".fiches");
-    // Création d’une balise dédiée à une pièce automobile
-    const pieceElement = document.createElement("article");
-    // On crée l’élément img.
-    const imageElement = document.createElement("img");
-    // On accède à l’indice i de la liste pieces pour configurer la source de l’image.
-    imageElement.src = pieces[i].image;
-    numeroElement.src = pieces[i].numéro;
-    ppgElement.src = pieces[i].ppg;
-    posteElement.src = pieces[i].poste;
-    joueuseElement.src = pieces[i].joueuse;
-    // Idem pour le nom, le prix et la catégorie...
-    
-    // On rattache la balise article à la section Fiches
-    sectionFiches.appendChild(pieceElement);
-    // On rattache l’image à pieceElement (la balise article)
-
-    pieceElement.appendChild(numeroElement);
-    // Idem pour le nom, le prix et la catégorie...
-    pieceElement.appendChild(imageElement);
-    pieceElement.appendChild(ppgElement);
-    pieceElement.appendChild(joueuseElement);
-    pieceElement.appendChild(posteElement);
-    
-
-    }
+const pieces = await fetch("joueuses.json").then(pieces => pieces.json());
+ 
+// Fonction qui génère toute la page web
+function genererPieces(pieces) {
+  for (let i = 0; i < pieces.length; i++) {
+       // Création d’une balise dédiée à une pièce auto
+       const pieceElement = document.createElement("article");
+       // On crée l’élément img.
+       const imageElement = document.createElement("img");
+       // On accède à l’indice i de la liste pieces pour configurer la source de l’image.
+       imageElement.src = pieces[i].image;
+       // On rattache l’image à pieceElement (la balise article)
+       pieceElement.appendChild(imageElement);
+       // Idem pour le nom, le prix et la catégorie ...
+       // ...    
+       // On rattache la balise article au body
+       document.body.appendChild(pieceElement);
+  }
+ 
+}
+ 
+// Premier affichage de la page
+genererPieces(pieces);
+ 
+// Ajout du listener pour trier les pièces par ordre de prix croissant
+const boutonTrier = document.querySelector(".btn-trier");
+boutonTrier.addEventListener("click", function () {
+   piecesOrdonnees = Array.from(pieces)
+   piecesOrdonnees.sort(function (a, b) {
+       return b.prix - a.prix;
+   });
+  // Effacement de l'écran et regénération de la page
+  document.querySelector(".fiches").innerHTML = "";
+  genererPieces(pieces);
+});
+ 
+// Ajout du listener pour filtrer les pièces non abordables
+const boutonFiltrer = document.querySelector(".btn-filtrer");
+boutonFiltrer.addEventListener("click", function () {
+   const piecesFiltrees = pieces.filter(function (piece) {
+       return piece.disponibilite;
+   });
+   // Effacement de l'écran et regénération de la page avec les pièces filtrées uniquement
+  document.querySelector(".fiches").innerHTML = "";
+  genererPieces(piecesFiltrees);
+});

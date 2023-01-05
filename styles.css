@@ -13,7 +13,7 @@ header {
 	align-items: center;
 	margin-bottom: 16px;
 	padding: 8px;
-	background-color: #7451eb;
+	background-color: #009818;
 	text-align: center;
 	color: white;
 }
@@ -37,6 +37,7 @@ main {
 	padding: 8px;
 	min-width: 300px;
 	min-height: 400px;
+	background-color: #dbdcdb;
 }
 .filtres h3 {
 	text-align: center;
@@ -65,4 +66,52 @@ main {
 }
 .fiches article h2 {
 	text-align: center;
+	
+	
+}
+
+
+
+.vertical-menu {
+  width: 250px; /* Set a width if you like */
+  
+  margin: auto
+
+ 
+ 
+}
+
+.vertical-menu a {
+  background-color: #eee; /* Grey background color */
+  color: black; /* Black text color */
+  display: block; /* Make the links appear below each other */
+  padding: 12px; /* Add some padding */
+  text-decoration: none; /* Remove underline from links */
+}
+
+.vertical-menu a:hover {
+  background-color: #ccc; /* Dark grey background on mouse-over */
+}
+
+.vertical-menu a.active {
+  background-color: #04AA6D; /* Add a green color to the "active/current" link */
+  color: white;
+}
+.warning
+{
+   display: flex;
+   flex-grow: 1;
+}
+
+.warning2
+{
+   display: flex;
+   flex-grow: 1;
+   float: none;
+}
+.warnin {
+	float:left;
+}
+.warnin2 {
+float:right;
 }
